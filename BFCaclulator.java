@@ -1,3 +1,5 @@
+
+
 public class BFCaclulator {
   /**
    * A simple implementation of calculator functions.
@@ -16,7 +18,7 @@ public class BFCaclulator {
   // +--------------+
   public BFCaclulator() throws Exception {
     lastValue = new BigFraction(0, 1);
-  }
+  } // BFCalculator()
   // +---------+------------------------------------------------------
   // | Methods |
   // +---------+
@@ -24,7 +26,7 @@ public class BFCaclulator {
   // Returns last value in calculator
   public BigFraction get() {
     return lastValue;
-  }
+  } // get()
 
   // Sets last value to val
   public void set(BigFraction val) {
@@ -56,4 +58,4 @@ public class BFCaclulator {
     lastValue = new BigFraction(0, 1);
   } // reset()
 
-}
+} // class BFCalculator

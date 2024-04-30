@@ -54,7 +54,7 @@ public class QuickCalculator {
       // Expression Case
       // Substituting Variables
       for (int i = 0; i < commandTokens.length; i++) {
-        commandTokens[i] = InteractiveCalculator.substituteVariables(commandTokens[i], registers);
+        commandTokens[i] = registers.substituteVariables(commandTokens[i]);
       } // for
 
       // Evaluating expression

@@ -32,4 +32,21 @@ public class Registers {
   } // get(char)
 
 
-}
+  // Substitute variables in string with numbers
+  public String substituteVariables(String expression) {
+    String outString = "";
+    char currentChar;
+    for (int i = 0; i < expression.length(); i++) {
+      currentChar = expression.charAt(i);
+      
+      if (Character.isAlphabetic(currentChar)) {
+        outString += this.get(currentChar).toString();
+        continue;
+      } // if
+
+      outString += currentChar;
+    } // for
+    return outString;
+  } // substituteVariables(String)
+
+} // class Registers

@@ -70,8 +70,6 @@ public class BigFraction {
 
   /**
    * Build a new fraction by parsing a string.
-   *
-   * Warning! Not yet implemented.
    */
   public BigFraction(String str) {
     String[] arr = str.split("/");

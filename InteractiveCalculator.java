@@ -11,46 +11,29 @@ import java.math.BigInteger;
 public class InteractiveCalculator {
   
   // Methods
-
-  // Substitute variables in string with numbers
-  public static String substituteVariables(String expression, Registers registers) {
-    String outString = "";
-    char currentChar;
-    for (int i = 0; i < expression.length(); i++) {
-      currentChar = expression.charAt(i);
-      
-      if (Character.isAlphabetic(currentChar)) {
-        outString += registers.get(currentChar).toString();
-        continue;
-      } // if
-
-      outString += currentChar;
-    } // for
-    return outString;
-  } // substituteVariables(String, Registers)
-
   // Evaluating expressions in string of two arguments
   public static BigFraction evaluate(BigFraction arg1, BigFraction arg2, char operator) throws Exception {
     
     if (operator == '+') {
       return arg1.add(arg2);
-    }
+    } // if
 
     if (operator == '-') {
       return arg1.subtract(arg2);
-    }
+    } // if
 
     if (operator == '*') {
       return arg1.multiply(arg2);
-    }
+    } // if
 
     if (operator == '/') {
       return arg1.divide(arg2);
-    }
+    } // if
 
     // if not a valid operator
     throw new Exception("Please enter a valid expression.");
   } // evaluate(BigFraction, BigFraction, char)
+
 
 
   // Main Method
@@ -100,7 +83,7 @@ public class InteractiveCalculator {
       // Expression Case
       // Substituting Variables
       for (int i = 0; i < commandTokens.length; i++) {
-        commandTokens[i] = substituteVariables(commandTokens[i], registers);
+        commandTokens[i] = registers.substituteVariables(commandTokens[i]);
       } // for
 
       BigFraction rollingResult = new BigFraction(commandTokens[0]);
