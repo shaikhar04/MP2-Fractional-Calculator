@@ -37,7 +37,7 @@ public class BigFraction {
    */
   public BigFraction(BigInteger num, BigInteger denom) throws Exception {
     if (denom.intValue() == 0) {
-      throw new Exception("zero denominators not permitted");
+      throw new ArithmeticException("Zero denominators not permitted");
     }
     this.num = num;
     this.denom = denom;
@@ -48,7 +48,7 @@ public class BigFraction {
    */
   public BigFraction(int num, int denom) throws Exception {
     if (denom == 0) {
-      throw new Exception("zero denominators not permitted");
+      throw new ArithmeticException("Zero denominators not permitted");
     }
     this.num = BigInteger.valueOf(num);
     this.denom = BigInteger.valueOf(denom);
@@ -59,7 +59,7 @@ public class BigFraction {
    */
   public BigFraction(BigFraction num, BigFraction denom) throws Exception {
     if (denom.numerator() == BigInteger.valueOf(0)) {
-      throw new Exception("zero denominators not permitted");
+      throw new ArithmeticException("Zero denominators not permitted");
     }
 
     BigFraction result = num.divide(denom);

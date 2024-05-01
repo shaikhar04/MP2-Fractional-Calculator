@@ -12,7 +12,6 @@ public class QuickCalculator {
       System.exit(0);
     } // if
 
-    // String[] commandline = {"1/2 + 1/2", "STORE a"};
     BFCaclulator calculator = new BFCaclulator();
     Registers registers = new Registers();
 
@@ -60,7 +59,7 @@ public class QuickCalculator {
           currentOperator = commandTokens[j].charAt(0);
           currentArg = new BigFraction(commandTokens[j+1]);
           calculator.evaluate(currentArg, currentOperator);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | ArithmeticException e) {
           // if expression in wrong form
           System.err.println("Please enter a valid expression.");
           System.exit(2);

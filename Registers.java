@@ -34,17 +34,19 @@ public class Registers {
 
   // Substitute variables in string with numbers
   public String substituteVariables(String expression) {
+    String[] expressionTokens = expression.split(" ");
     String outString = "";
     char currentChar;
-    for (int i = 0; i < expression.length(); i++) {
-      currentChar = expression.charAt(i);
+    for (int i = 0; i < expressionTokens.length; i++) {
+      currentChar = expressionTokens[i].charAt(i);
       
-      if (Character.isAlphabetic(currentChar)) {
+      // Register name can only be single character [a-z]
+      if ((Character.isAlphabetic(currentChar)) && (expressionTokens[i].length() == 1)) {
         outString += this.get(currentChar).toString();
         continue;
       } // if
 
-      outString += currentChar;
+      outString += expressionTokens[i];
     } // for
     return outString;
   } // substituteVariables(String)
