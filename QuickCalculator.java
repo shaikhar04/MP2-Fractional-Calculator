@@ -21,7 +21,6 @@ public class QuickCalculator {
 
     // Parsing the input string
     String[] commandTokens;
-    char regName = '?';
 
     // Evaluating each expression
     for (int exp = 0; exp < args.length; exp++) { 
@@ -35,20 +34,15 @@ public class QuickCalculator {
       
       // Store Case
       if (commandTokens[0].equals("STORE")) {
-        if (commandTokens.length == 2) {
-          if (commandTokens[1].length() == 1) {
-            regName = commandTokens[1].charAt(0);
-        
-            if (Character.isAlphabetic(regName)) {
-              registers.store(regName, calculator.get());
-              continue;
-            } // if
-          } // if
-        } // if
-
-        System.err.println("To store a value type: STORE <registerName>");
-        pen.close();
-        System.exit(1);
+        try {
+          InteractiveCalculator.store(calculator, registers, commandTokens);
+          continue;
+        } catch (Exception e) {
+          System.err.println("To store a value type: STORE <registerName>");
+          e.printStackTrace();
+          pen.close();
+          System.exit(1);
+        } // try catch
       } // if
       
       // Expression Case
@@ -58,14 +52,14 @@ public class QuickCalculator {
       } // for
 
       // Evaluating expression
-      BigFraction rollingResult = new BigFraction(commandTokens[0]);
+      calculator.set(new BigFraction(commandTokens[0]));
       char currentOperator;
       BigFraction currentArg;
       for (int j = 1; j < commandTokens.length; j += 2) {
         try {
           currentOperator = commandTokens[j].charAt(0);
           currentArg = new BigFraction(commandTokens[j+1]);
-          rollingResult = InteractiveCalculator.evaluate(rollingResult, currentArg, currentOperator);
+          calculator.evaluate(currentArg, currentOperator);
         } catch (IndexOutOfBoundsException e) {
           // if expression in wrong form
           System.err.println("Please enter a valid expression.");
@@ -73,10 +67,10 @@ public class QuickCalculator {
         } // try catch
       } // for
 
-      rollingResult.simplify();
-      calculator.set(rollingResult);
+      calculator.simplify();
+      BigFraction result = calculator.get();
     
-      pen.printf("%s = %s\n", args[exp], rollingResult);
+      pen.printf("%s = %s\n", args[exp], result);
       pen.flush();
 
     } // for

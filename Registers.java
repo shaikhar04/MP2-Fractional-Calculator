@@ -21,8 +21,8 @@ public class Registers {
   } // registerIndex(char)
 
   // Stores the given value into the register
-  public void store(char register, BigFraction val) {
-    val.simplify();
+  public void store(char register, BigFraction val) throws Exception {
+    val = val.simplify();
     registers[registerIndex(register)] = val;
   } // store(char, BigFraction)
 

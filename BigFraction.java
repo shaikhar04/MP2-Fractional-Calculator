@@ -106,7 +106,7 @@ public class BigFraction {
     resultNumerator = (this.num.multiply(addMe.denom)).add(addMe.num.multiply(this.denom));
 
     BigFraction ret = new BigFraction(resultNumerator, resultDenominator);
-    ret.simplify();
+    ret = ret.simplify();
 
     return ret;
   } // add(BigFraction)
@@ -122,7 +122,7 @@ public class BigFraction {
         (this.num.multiply(subtractMe.denom)).subtract(subtractMe.num.multiply(this.denom));
 
     BigFraction ret = new BigFraction(resultNumerator, resultDenominator);
-    ret.simplify();
+    ret = ret.simplify();
 
     return ret;
   } // add(BigFraction)
@@ -130,7 +130,7 @@ public class BigFraction {
   // Returns the reciprocal of the BigFraction
   public BigFraction inverse() throws Exception {
     BigFraction ret = new BigFraction(this.denominator(), this.numerator());
-    ret.simplify();
+    ret = ret.simplify();
     return ret;
   } // inverse()
 
@@ -169,17 +169,20 @@ public class BigFraction {
   } // toString()
 
   // Simplifies BigFraction into reduced form.
-  public void simplify() {
+  public BigFraction simplify() throws Exception {
     BigInteger gcd = this.denominator().gcd(this.numerator());
-    this.denom = this.denom.divide(gcd);
-    this.num = this.num.divide(gcd);
+    BigInteger simple_denominator = this.denom.divide(gcd);
+    BigInteger simple_numerator = this.num.divide(gcd);
+    BigFraction simplified = new BigFraction(simple_numerator, simple_denominator);
+
+    return simplified;
   } // simplify()
 
   public BigFraction multiply(BigFraction f) throws Exception {
     BigInteger prod_numerator = this.numerator().multiply(f.numerator());
     BigInteger prod_denominator = this.denominator().multiply(f.denominator());
     BigFraction prod = new BigFraction(prod_numerator, prod_denominator);
-    prod.simplify();
+    prod = prod.simplify();
     return prod;
   } // multiply(BigFraction f)
 
@@ -187,7 +190,7 @@ public class BigFraction {
     BigInteger quotient_numerator = this.numerator().multiply(f.denominator());
     BigInteger quotient_denominator = this.denominator().multiply(f.numerator());
     BigFraction quotient = new BigFraction(quotient_numerator, quotient_denominator);
-    quotient.simplify();
+    quotient = quotient.simplify();
     return quotient;
   } // divide(BigFraction f)
 
@@ -198,7 +201,7 @@ public class BigFraction {
 
     numerator = numerator.mod(denominator);
     BigFraction fractional_value = new BigFraction(numerator, denominator);
-    fractional_value.simplify();
+    fractional_value = fractional_value.simplify();
 
     return fractional_value;
   } // fractional()

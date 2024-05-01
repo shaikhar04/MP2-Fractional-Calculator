@@ -33,6 +33,10 @@ public class BFCaclulator {
     lastValue = val;
   } // set(BigFraction)
 
+  public void simplify() throws Exception {
+    lastValue = lastValue.simplify();
+  }
+
   // Adds val to the last computed value
   public void add(BigFraction val) throws Exception {
     lastValue = lastValue.add(val);
@@ -58,4 +62,20 @@ public class BFCaclulator {
     lastValue = new BigFraction(0, 1);
   } // reset()
 
+  // Evaluating expressions in string of two arguments
+  public void evaluate(BigFraction arg, char operator) throws Exception {
+
+    if (operator == '+') {
+      add(arg);
+    } else if (operator == '-') {
+      subtract(arg);
+    } else if (operator == '*') {
+      multiply(arg);
+    } else if (operator == '/') {
+      divide(arg);
+    } else {
+      // if not a valid operator
+      throw new Exception("Please enter a valid expression.");
+    } // if else
+  } // evaluate(BigFraction, BigFraction, char)
 } // class BFCalculator
